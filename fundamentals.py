@@ -30,6 +30,24 @@ print("The last character -> " + "Hello"[4])
 # - type()
 # - isinstance()
 
+# Comparison Operators
+# -----------------------
+# >   greater than
+# <   less than
+# >=  Greater than or equal to
+# <=  Less than or equal to
+# ==  Equal to
+# !=  Not equal to
+
+# Mathematical Operators
+# ________________________
+# Modulo operator % -> tells us the remaining of a division
+#
+#
+#
+#
+#
+
 some_number = 1234567
 
 # Some text to print in the console
