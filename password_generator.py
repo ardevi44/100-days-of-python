@@ -27,11 +27,15 @@ symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
 print("Welcome to the PyPassword Generator!")
 
+# This is my solution below ...
+
+
 letters_quant = int(
     input("How many letters would you like in your password?: "))
 symbols_quant = int(input("How many symbols would you like?: "))
 numbers_quant = int(input("How many numbers would you like?: "))
 
+'''
 password = ""
 
 for letter in range(0, letters_quant):
@@ -43,13 +47,28 @@ for symbol in range(0, symbols_quant):
 for number in range(0, numbers_quant):
     password += numbers[random.randint(0, len(numbers) - 1)]
 
-print(f"Total of characters in your password: {len(password)}")
-print(f"Password: {password}")
-
 final_password = ''
 for current_time in range(0, len(password)):
     random_position = random.randint(0, len(password) - 1)
     final_password += password[random_position]
     password = password[:random_position] + password[random_position + 1:]
 
-print(f"This is your final password: {final_password}")
+print(f"This is your password: {final_password}")
+'''
+
+# Here is Angela's solution ;) [From the course]
+# Pretty much simpler than mine ...
+
+password_list = []
+
+for char in range(0, letters_quant):
+    # The choice method is more directly it generates de random index for us
+    password_list += random.choice(letters)
+for char in range(0, symbols_quant):
+    password_list += random.choice(symbols)
+for char in range(0, numbers_quant):
+    password_list += random.choice(numbers)
+
+# Look how a search in google simplifies our work or using the IA :)
+random.shuffle(password_list)
+print("".join(password_list))
