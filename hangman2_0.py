@@ -6,6 +6,7 @@ number_guesses = len(stickman.draw) - 1
 final_guess_complete = False
 final_guess = ""
 alt_secret_word = ""
+coincidences = []
 
 # Print the current final guessed word with underscores
 
@@ -68,6 +69,10 @@ def hide_secret_word(list_secret_word):
     print()
 
 
+def save_letter(guess_letter):
+    coincidences.append(guess_letter)
+
+
 secret_word = input(
     "Type the secret word: ")
 alt_secret_word = secret_word.lower().strip()
@@ -101,6 +106,12 @@ while (current_try <= number_guesses) and (not final_guess_complete):
         print(
             "Enter just one character or the secret word, if you already guessed it. Try again")
     elif (guess_letter in alt_secret_word):
+        if (guess_letter in coincidences):
+            os.system('cls')
+            print(f"You all ready tried letter {guess_letter}")
+            continue
+        else:
+            save_letter(guess_letter)
         replace_user_coincidences(
             guess_letter, list_secret_word, list_final_guess)
         final_guess = "".join(list_final_guess)
