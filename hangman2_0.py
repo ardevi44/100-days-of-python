@@ -73,6 +73,8 @@ def save_letter(guess_letter):
     coincidences.append(guess_letter)
 
 
+print("Welcome to the hangman game 🪢😐")
+print("Guess the secret word by guessing letters.")
 secret_word = input(
     "Type the secret word: ")
 alt_secret_word = secret_word.lower().strip()
