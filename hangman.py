@@ -1,6 +1,7 @@
 # This file contents the solution of the course for the hangman challenge
 # Angela's solution actually
 import random
+import hangman_words
 
 stages = [
     """
@@ -68,11 +69,10 @@ stages = [
 """
 ]
 
-word_list = ["aardvark", "baboon", "camel"]
 lives = 6
 
 # choose a random word from the list and print it with its length
-chosen_word = random.choice(word_list)
+chosen_word = random.choice(hangman_words.word_list)
 print(chosen_word)
 print(f"length {len(chosen_word)}")
 
