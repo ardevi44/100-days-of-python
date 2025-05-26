@@ -2,6 +2,10 @@
 # Angela's solution actually
 import random
 import hangman_words
+# another way to do as above
+# from hangman_words import word_list
+from hangman_words import logo
+# import os
 
 stages = [
     """
@@ -70,6 +74,7 @@ stages = [
 ]
 
 lives = 6
+print(logo)
 
 # choose a random word from the list and print it with its length
 chosen_word = random.choice(hangman_words.word_list)
@@ -88,8 +93,12 @@ game_over = False
 correct_letters = []
 
 while not game_over:
-    # ask the user for a letter ...
     guess = input("Guess a letter: ").lower()
+    if guess in correct_letters:
+        print(f"You've al ready guessed {guess}")
+    # ask the user for a letter ...
+    print(
+        f"******************************{lives}/6 LIVES LEFT******************************")
     display = ""
     for letter in chosen_word:
         if letter in correct_letters:
@@ -102,10 +111,13 @@ while not game_over:
     print(display)
     if guess not in chosen_word:
         lives -= 1
+        print(
+            f"You guessed {guess}, that's not in the word. You loose a life.")
         if lives == 0:
             game_over = True
-            print("You lose.")
+            print(
+                f"******************************IT WAS {chosen_word}! YOU LOOSE******************************")
     if "_" not in display:
         game_over = True
-        print("You win!")
+        print(f"******************************YOU WIN!******************************")
     print(stages[lives])
