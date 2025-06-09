@@ -6,46 +6,35 @@ result = ""
 
 
 def encrypt(original_text, shift_amount):
-    alphabet_last_index = len(alphabet) - 1
-    encrypt_result = ""
+    alphabet_last_index = len(alphabet) - 1  # Last index of the alphabet
+    encrypted_result = ""
     for letter in original_text:
-        # Just for validation
-        if letter == " ":
-            encrypt_result += letter
+        if not letter in alphabet:  # If is some other letter not in alphabet just add this
+            encrypted_result += letter
             continue
-        elif not letter in alphabet:
-            encrypt_result += "%"
-            continue
-        # Then ...
         shifted_index = alphabet.index(letter) + shift_amount
         if shifted_index > alphabet_last_index:  # We're out of bounds
             # The difference between last and the current index
             indexes_diff = alphabet_last_index - alphabet.index(letter)
-            encrypt_result += alphabet[shift_amount - indexes_diff - 1]
+            encrypted_result += alphabet[shift_amount - indexes_diff - 1]
         else:
-            encrypt_result += alphabet[alphabet.index(letter) + shift_amount]
-
-    if len(encrypt_result) != 0:
-        return encrypt_result
+            encrypted_result += alphabet[alphabet.index(letter) + shift_amount]
+    if len(encrypted_result) != 0:
+        return encrypted_result
     else:
         return 0
 
 
 def decrypt(original_text, shift_amount):
-    decrypt_result = ""
-
+    decrypted_result = ""
     for letter in original_text:
-        if letter == " ":
-            decrypt_result += letter
-            continue
-        elif not letter in alphabet:
-            decrypt_result += "%"
+        if not letter in alphabet:
+            decrypted_result += letter
             continue
         shifted_index = alphabet.index(letter) - shift_amount
-        decrypt_result += alphabet[shifted_index]
-
-    if len(decrypt_result) != 0:
-        return decrypt_result
+        decrypted_result += alphabet[shifted_index]
+    if len(decrypted_result) != 0:
+        return decrypted_result
     else:
         return 0
 
