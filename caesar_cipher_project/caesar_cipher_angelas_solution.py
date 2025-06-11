@@ -22,9 +22,16 @@ def caesar(original_text, shift_amount, encode_or_decode):
         f"Here is the {custom_message} result: {output_text}")
 
 
-direction = input(
-    "Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
+program_over = False
 
-caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
+while not program_over:
+    direction = input(
+        "Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+    caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
+    restart = input(
+        "Type 'yes' if you want to go again. Otherwise, type 'no'.\n").lower()
+    if restart == "no":
+        program_over = True
+        print("Goodbye")
