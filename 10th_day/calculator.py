@@ -1,6 +1,29 @@
 number_1 = None
 number_2 = None
-list_of_operations = ["+", "-", "*", "/"]
+
+
+def addition(a, b):
+    return a + b
+
+
+def subtraction(a, b):
+    return a - b
+
+
+def multiplication(a, b):
+    return a * b
+
+
+def division(a, b):
+    return a / b
+
+
+operations = {
+    "+": addition,
+    "-": subtraction,
+    "*": multiplication,
+    "/": division
+}
 op_selected = None
 first_calculate = True
 still_calculating = True
@@ -29,15 +52,15 @@ def pick_an_operation():
     """Show a list of operations to choose
     if the option is not in the list of operations it will ask to choose again
     """
-    global list_of_operations
+    global operations
     global op_selected
-    while not (op_selected in list_of_operations):
+    while op_selected not in operations:
         last_char = ", "
         print("pick an operation ", end="")
-        for i, op in enumerate(list_of_operations):
-            if i == len(list_of_operations) - 1:
+        for i, (op_symbol, operation) in enumerate(operations.items()):
+            if i == len(operations) - 1:
                 last_char = "  : "
-            print(op, end=last_char)
+            print(op_symbol, end=last_char)
         op_selected = input()
 
 
@@ -50,16 +73,16 @@ def perform_operation(op):
     global op_selected
 
     if op == "+":
-        result = number_1 + number_2
+        result = operations["+"](number_1, number_2)
         print(f"{number_1} + {number_2} = {result}")
     elif op == "-":
-        result = number_1 - number_2
+        result = operations["-"](number_1, number_2)
         print(f"{number_1} - {number_2} = {result}")
     elif op == "*":
-        result = number_1 * number_2
+        result = operations["*"](number_1, number_2)
         print(f"{number_1} * {number_2} = {result}")
     elif op == "/":
-        result = number_1 / number_2
+        result = operations["/"](number_1, number_2)
         print(f"{number_1} / {number_2} = {result}")
 
     number_1 = None
