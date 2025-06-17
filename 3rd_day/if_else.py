@@ -67,12 +67,6 @@
 # Pizza delivery program
 # ----------------------
 
-# TODO: work out how much they need to pay based on their size choice.
-
-# TODO: work out how much to add to their bill based on their pepperoni choice.
-
-# TODO: work out their final amount based on whether if they want extra cheese.
-
 bill = 0
 print("Welcome to Python Pizza Deliveries!")
 size = input("What size pizza do you want? S, M or L: ").lower()
