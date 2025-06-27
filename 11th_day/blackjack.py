@@ -10,6 +10,7 @@ software_money = 2500
 software_bet = 0
 software_cards = []
 software_score_cards = 0
+bets_total = 0
 # Copy the deck array, for not update the original
 copy_deck = np.array(deck).copy()
 
@@ -19,12 +20,14 @@ def ask_for_bets():
     global software_bet
     global player_money
     global software_money
+    global bets_total
 
     player_bet = float(input("Place your bet: "))
     software_bet = player_bet
 
     player_money -= player_bet
     software_money -= software_bet
+    bets_total = player_bet + software_bet
     show_money_status()
 
 
@@ -83,6 +86,28 @@ def sum_score(card, turn):
         software_score_cards += card["value"]
 
 
+def claim_bets(player):
+    global player_money
+    global bets_total
+    if player == "player":
+        player_money += bets_total
+    bets_total = 0
+
+
+def check_initial_blackjack(player_cards):
+    has_10 = False
+    has_ace = False
+    for card in player_cards:
+        if "is_ace" in card:
+            has_ace = True
+        if card["value"] == 10:
+            has_10 = True
+    if has_10 and has_ace:
+        return True
+    else:
+        return False
+
+
 def show_players_cards(player_cards, software_cards):
     print("Player cards: ")
     # Print player's cards ...
@@ -121,6 +146,11 @@ def deal_initial_cards():
             player_turn = True
         copy_deck = np.delete(copy_deck, -1)
     show_players_cards(player_cards, software_cards)
+    player_blackjack = check_initial_blackjack(player_cards)
+    if (player_blackjack):
+        print("Black Jack! Player wins this round.")
+        claim_bets("player")
+        show_money_status()
 
 
 """
@@ -134,20 +164,15 @@ def print_deck(deck):
             f"{index+1} -> {card["name_card"]} -> {card["code_card"]}{ace_string}")
 """
 
-"""
 # This will be uncomment later
 # Shuffle the copy deck
 print("Shuffling...")
 np.random.shuffle(copy_deck)
-"""
 
 # copy_deck = np.delete(copy_deck, -1)
-"""
-# This will be uncomment later
-# Main execute of the program
+
 show_money_status()
 ask_for_bets()
 deal_initial_cards()
-"""
 
-print(f"Length of the original deck: {len(deck)}")
+# print(f"Length of the original deck: {len(deck)}")
