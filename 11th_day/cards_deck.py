@@ -79,5 +79,82 @@ cards_deck = [
         "ascii_art": ascii_cards.ace_of_clubs,
         "is_ace": True
     },
-
+    {
+        "name_card": "Two of Spades",
+        "code_card": "2S",
+        # pending add the ascii_art
+        "value": 2
+    },
+    {
+        "name_card": "Three of Spades",
+        "code_card": "3S",
+        # pending add the ascii_art
+        "value": 3
+    },
+    {
+        "name_card": "Four of Spades",
+        "code_card": "4S",
+        # pending add the ascii_art
+        "value": 4
+    },
+    {
+        "name_card": "Five of Spades",
+        "code_card": "5S",
+        # pending add the ascii_art
+        "value": 5
+    },
+    {
+        "name_card": "Six of Spades",
+        "code_card": "6S",
+        # pending add the ascii_art
+        "value": 6
+    },
+    {
+        "name_card": "Seven of Spades",
+        "code_card": "7S",
+        # pending add the ascii_art
+        "value": 7
+    },
+    {
+        "name_card": "Eight of Spades",
+        "code_card": "8S",
+        # pending add the ascii_art
+        "value": 8
+    },
+    {
+        "name_card": "Nide of Spades",
+        "code_card": "9S",
+        # pending add the ascii_art
+        "value": 9
+    },
+    {
+        "name_card": "Ten of Spades",
+        "code_card": "10S",
+        # pending add the ascii_art
+        "value": 10
+    },
+    {
+        "name_card": "Jack of Spades",
+        "code_card": "JS",
+        # pending add the ascii_art
+        "value": 10
+    },
+    {
+        "name_card": "Queen of Spades",
+        "code_card": "QS",
+        # pending add the ascii_art
+        "value": 10
+    },
+    {
+        "name_card": "King of Spades",
+        "code_card": "KS",
+        # pending add the ascii_art
+        "value": 10
+    },
+    {
+        "name_card": "Ace of Spades",
+        "code_card": "AS",
+        # pending add the ascii_art
+        "is_ace": True
+    },
 ]

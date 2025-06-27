@@ -134,13 +134,20 @@ def print_deck(deck):
             f"{index+1} -> {card["name_card"]} -> {card["code_card"]}{ace_string}")
 """
 
+"""
+# This will be uncomment later
 # Shuffle the copy deck
 print("Shuffling...")
 np.random.shuffle(copy_deck)
-
+"""
 
 # copy_deck = np.delete(copy_deck, -1)
-
+"""
+# This will be uncomment later
+# Main execute of the program
 show_money_status()
 ask_for_bets()
 deal_initial_cards()
+"""
+
+print(f"Length of the original deck: {len(deck)}")
