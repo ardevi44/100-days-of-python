@@ -34,9 +34,17 @@ def print_dealer_score():
     print(f"Dealer score: {software_score_cards}")
 
 
-def is_ace(card, current_score):
+# This just sets the value of the card if is an ace
+def is_ace(card, player):
+    global player_score_cards
+    global software_score_cards
     if "is_ace" in card:
         value = 11
+        if player == "player":
+            current_score = player_score_cards
+        else:
+            current_score = software_score_cards
+
         if (current_score + value) > 21:
             value = 1
         card["value"] = value
@@ -47,18 +55,19 @@ def sum_score(card, turn):
     global player_score_cards
     global software_score_cards
     if turn == "player":
-        card = is_ace(card, player_score_cards)
         player_score_cards += card["value"]
     else:
-        card = is_ace(card, software_score_cards)
         software_score_cards += card["value"]
 
 
 def claim_bets(player):
     global player_money
+    global software_money
     global bets_total
     if player == "player":
         player_money += bets_total
+    else:
+        software_money += bets_total
     bets_total = 0
 
 
@@ -76,51 +85,149 @@ def check_initial_blackjack(player_cards):
         return False
 
 
-def show_players_cards(player_cards, software_cards):
+def show_player_cards():
+    global player_cards
+    global player_score_cards
+    player_score_cards = 0
     print("Player cards: ")
-    # Print player's cards ...
     for index, card in enumerate(player_cards):
         sum_score(card, turn="player")
         print(f"{index + 1} -> {card["code_card"]}")
     print_player_score()
-    # Print dealers's cards ...
+
+
+def show_dealer_cards():
+    global software_cards
+    global software_score_cards
+    software_score_cards = 0
     print("Dealer cards: ")
     for index, card in enumerate(software_cards):
+        if player_turn_end:
+            if "hidden" in card:
+                del card["hidden"]
         if "hidden" in card:
-            # sum_score(card, turn="dealer")
             print(f"{index + 1} -> hidden")
-            # print(f"Card code: {card["code_card"]}")
-            # print(f"Card value: {card["value"]}")
         else:
             sum_score(card, turn="dealer")
             print(f"{index + 1} -> {card["code_card"]}")
     print_dealer_score()
 
 
-def deal_initial_cards():
+def deal_cards():
     global player_cards
     global software_cards
     global copy_deck
-    player_turn = True
-    cards_to_deal = 2
-    while (len(player_cards) < cards_to_deal) or (len(software_cards) < cards_to_deal):
-        if player_turn:
-            player_cards.append(copy_deck[-1])
-            player_turn = False
+    global player_turn_end
+    initial_cards_quant = 2
+    player = "player"
+    while (len(player_cards) < initial_cards_quant) or (len(software_cards) < initial_cards_quant):
+        take_a_card(player)
+        if player == "player":
+            player = "software"
         else:
-            software_cards.append(copy_deck[-1])
-            if len(software_cards) == 1:
-                software_cards[-1]["hidden"] = True
-            player_turn = True
-        copy_deck = np.delete(copy_deck, -1)
-    show_players_cards(player_cards, software_cards)
+            player = "player"
+    show_player_cards()
+    show_dealer_cards()
     player_blackjack = check_initial_blackjack(player_cards)
     if (player_blackjack):
+        player_turn_end = True
+        show_player_cards()
+        show_dealer_cards()
         print("Black Jack! Player wins this round.")
         claim_bets("player")
         show_money_status()
 
 
+# Takes a card from the copy_deck and assigns it to the player of software
+def take_a_card(player):
+    global copy_deck
+    global player_cards
+    global software_cards
+    card = copy_deck[-1]
+    card = is_ace(card, player)
+    if player == "player":
+        player_cards.append(card)
+    else:
+        software_cards.append(card)
+        if len(software_cards) == 1:
+            software_cards[-1]["hidden"] = True
+    copy_deck = np.delete(copy_deck, -1)
+
+
+def double_the_wager():
+    global player_money
+    global player_bet
+    global player_turn_end
+    global software_money
+    global software_bet
+    global player_cards
+    global copy_deck
+    global bets_total
+
+    bets_total = bets_total * 2
+    player_money -= player_bet
+    software_money -= software_bet
+
+    take_a_card("player")
+    player_turn_end = True
+    show_player_cards()
+    show_dealer_cards()
+    check_the_winner()
+
+
+def check_the_winner():
+    global player_cards
+    if player_score_cards > 21:
+        for card in player_cards:
+            if "is_ace" in card:
+                if card["value"] == 11:
+                    card["value"] = 1
+        show_player_cards()
+        show_dealer_cards()
+    player_black_jack = player_score_cards == 21
+    player_over_software = player_score_cards > software_score_cards and player_score_cards < 21
+    if player_black_jack or player_over_software:
+        if player_black_jack:
+            print("BlackJack!")
+        print("Player wins this round")
+        claim_bets("player")
+        show_money_status()
+    else:
+        if software_score_cards == 21:
+            print("BlackJack!")
+        print("Dealer wins this round")
+        claim_bets("dealer")
+        show_money_status()
+
+
+def hit_new_card():
+    pass
+
+
+def stand_w_cards():
+    pass
+
+
+def choose_option():
+    global first_bet
+    dob_wag_op = ""
+    if first_bet:
+        dob_wag_op = "-> [D] Double: Double the wager, take a card, and forward against the dealer"
+        first_bet = False
+    option = input(f"""You have three options now:
+          {dob_wag_op}         
+          -> [H] Hit: Take one more card and forward
+          -> [S] Stand: Keep your cards and forward against the dealer""")
+    option = option.lower().strip()
+    if option == "h":
+        hit_new_card()
+    elif option == "d":
+        double_the_wager()
+    elif option == "s":
+        stand_w_cards()
+
+
+# This functions will be useful later
 """
 def print_one_card(card):
     card_it = zip(card)
