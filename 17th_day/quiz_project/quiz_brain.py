@@ -27,8 +27,8 @@ class QuestionBrain:
         return "You've completed the quiz\n" + f"Your final score was: {self.score}/{len(self.question_list)}\n" + f"Your rating is {rating}"
 
     def check_answer(self, answer, correct_answer):
-        """Check the answer against the correct answer, increments the score in 1 if both
-        are the equal, and print the score till now"""
+        """Check the answer based on the correct answer, increments the score in 1 if the
+        answer is correct, and print the score till now"""
         if answer.lower().strip() == correct_answer.lower().strip():
             self.score += 1
             print("You got it right!")

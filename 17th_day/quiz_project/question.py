@@ -11,10 +11,10 @@ class Question:
 
     @staticmethod
     def create_question_bank(data):
-        """Static method that receive a dictionary of questions: {text: string, answer: boolean} and returns
-        a list of Question objects """
+        """Static method that receives a list of dictionaries with questions in form: {question: string, correct_answer: string} and returns
+        a list of Question objects"""
         question_bank = []
         for question in data:
             question_bank.append(
-                Question(question["text"], question["answer"]))
+                Question(question["question"], question["correct_answer"]))
         return question_bank
