@@ -3,6 +3,7 @@
 # from turtle import Screen as s
 # from turtle import *
 from drawable_pen import Drawable
+from turtle import Turtle
 
 
 def draw_a_square(t_object, side_width):

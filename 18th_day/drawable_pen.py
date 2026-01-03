@@ -13,8 +13,6 @@ class Drawable:
         self.t.width(5)
         self.distance = distance
         self.movements = 100
-        self.colors = [(35, 23, 206), (206, 23, 23),
-                       (194, 206, 23), (206, 23, 197)]
 
     def move_forward(self, distance: int):
         self.t.forward(distance)
@@ -30,11 +28,12 @@ class Drawable:
     def move_backward(self, distance: int):
         self.t.backward(distance)
 
+    def generate_random_color(self):
+        return random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+
     def generate_random_movements(self, distance: int = 30):
-        i = 0
         while self.movements > 0:
-            i = 0 if i == len(self.colors) else i
-            tuple_color = self.colors[i]
+            tuple_color = self.generate_random_color()
             self.t.color(tuple_color)
             number_movement = random.randint(1, 4)
             match number_movement:
@@ -46,6 +45,5 @@ class Drawable:
                     self.move_left(distance)
                 case 4:
                     self.move_backward(distance)
-            i += 1
             self.movements -= 1
         self.s.exitonclick()
