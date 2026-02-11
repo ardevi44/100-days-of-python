@@ -3,7 +3,8 @@
 # from turtle import Screen as s
 # from turtle import *
 from drawable_pen import Drawable
-from turtle import Turtle
+from turtle import Turtle, Screen
+import random
 
 
 def draw_a_square(t_object, side_width):
@@ -28,6 +29,15 @@ def draw_a_dashed_line(t, length, num_lines):
 
 
 def print_pentagon(turtle, side_len):
+    """
+    Draws a simple pentagon with side_len specification.
+
+    Args:
+      turtle (Turtle): A Turtle Object
+      side_len (int): The desired length of the sides
+    Returns:
+      ---
+    """
     angle = 360 / 5
     for i in range(5):
         turtle.forward(side_len)
@@ -45,5 +55,37 @@ def print_first_six_polygons(t, side_len):
         sides_number += 1
 
 
-d = Drawable()
-d.generate_random_movements()
+# d = Drawable()
+# d.generate_random_movements()
+s = Screen()
+s.colormode(255)
+t = Turtle()
+t.width(3)
+t.speed("fastest")
+
+
+def draw_spirograph(size_of_gap):
+    for _ in range(int(360 / size_of_gap)):
+        t.color(random.randint(0, 255), random.randint(
+            0, 255), random.randint(0, 255))
+        t.circle(100)
+        t.setheading(t.heading() + size_of_gap)
+
+
+draw_spirograph(15)
+
+s.exitonclick()
+
+"""
+It is another solution
+
+space_available = 360
+angle_required = 5
+number_of_circles = (space_available / angle_required)
+while number_of_circles > 0:
+    t.color(random.randint(0, 255), random.randint(
+        0, 255), random.randint(0, 255))
+    t.circle(100)
+    t.left(angle_required)
+    number_of_circles -= 1
+"""
