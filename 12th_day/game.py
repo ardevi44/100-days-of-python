@@ -10,16 +10,15 @@ def increase_enemies():
 
 
 increase_enemies()  # output 2
-# And this below is a global scope
-print(f"enemies outside function: {enemies}")  # output 1
+print(f"enemies outside function: {enemies}")  # output 1 because global scope
 
 
-# def drink_potion():
-#     potion_strength = 2
-#     print(potion_strength)
+def drink_potion():
+    potion_strength = 2
+    print(potion_strength)
 
 
-# drink_potion()
+drink_potion()
 # print(potion_strength) Not defined in this scope
 
 # Global scope
@@ -47,4 +46,17 @@ enemies = ["Skeleton", "zombies", "Alien"]
 if game_level < 5:
     new_enemy = enemies[0]
 
-print(new_enemy)
+print(new_enemy)  # 'Skeleton' because there is no block scope
+
+# Another great idea in order to modify a global variable is to create a function that do this
+my_global_number = 56
+
+
+def increase_by_2(my_number):
+    my_number += 2
+    return my_number
+
+
+print(my_global_number)
+my_global_number = increase_by_2(my_global_number)
+print(my_global_number)
