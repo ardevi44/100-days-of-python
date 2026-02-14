@@ -18,6 +18,7 @@ def division(a, b):
     return a / b
 
 
+# Dictionary with operations
 operations = {
     "+": addition,
     "-": subtraction,
@@ -115,7 +116,7 @@ def forward_or_exit():
             print("Wrong option.")
 
 
-def calculator(result):
+def ask_numbers(result):
     global op_selected
     ask_number(result)
     pick_an_operation()
@@ -123,4 +124,29 @@ def calculator(result):
     perform_operation(op_selected)
 
 
-forward_or_exit()
+def calculator():
+    global first_calculate
+    global result
+    global still_calculating
+    forward_option = ""
+    while still_calculating:
+        if forward_option != "n" and forward_option != "c":
+            print("Type [N] for a new calculus, or [E] to exit: ", end="")
+        elif result and (forward_option == "c" or forward_option == "n"):
+            print(
+                f"Type [C] to continue with {result}, [N] for a new calculus, or [E] to exit: ", end="")
+
+        forward_option = input().lower().strip()
+
+        if forward_option == "n":
+            ask_numbers(result=None)
+        elif (forward_option == "c") and result:
+            ask_numbers(result=result)
+        elif forward_option == "e":
+            print("Bye bye...")
+            still_calculating = False
+        else:
+            print("Wrong option.")
+
+
+calculator()
