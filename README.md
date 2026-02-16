@@ -6,7 +6,7 @@ Well this is just my advance about the Udemy online course.
 
 ## How to run the files
 ---
-- Like any other repo you'll have to cloning first or downloaded or whatever just make sure to have it in your local machine.
+- Like any other repo you'll have to clone first or download or whatever, just make sure to have it in your local machine.
 - Then open the repo source folder in your terminal.
 - And just like any other .py file. If you have installed python just run the `python` command plus the name of the file. *`python sample.py`*. And that's it
 
