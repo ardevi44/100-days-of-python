@@ -26,6 +26,7 @@ class User:
 # Doesn't use the new keyword like in other programming languages
 user_1 = User("001", "Ardevi44")
 user_2 = User("002", "Angela")
-
+# You can add new attributes dynamically like JS (not recommended)
+user_1.description = "A cool guy seeking for knowledge"
 user_1.follow(user_2)
 user_1.show_followers_and_followings()
