@@ -40,11 +40,6 @@ def send_turtles_start(turtle_rainbow):
 
 turtle_rainbow = generate_colored_turtles()
 send_turtles_start(turtle_rainbow)
-# user_bet = screen.textinput(
-#     title="Make your bet",
-#     prompt="Which turtle you think will win the race?"
-#     "\nEnter a color: "
-# )
 
 
 included_color = False
@@ -78,7 +73,6 @@ if user_bet:
         if race_over:
             break
     if winning_turtle == user_bet:
-        # print()
         messagebox.showinfo(
             message=f"You've won! The {winning_turtle} is the winner!")
     else:
@@ -89,4 +83,4 @@ else:
     screen.bye()
 
 
-screen.mainloop()
+# screen.mainloop()
